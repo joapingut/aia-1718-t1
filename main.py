@@ -11,11 +11,11 @@ print('Hello, loading predictor')
 
 masc = Utils.readLettersMasc('ressources/letters.txt')
 allowed_chars = Utils.extractAllowedChars(masc)
-letters_corpus = Corpus.getCaracteresUnigram(Utils.flatListOfStrings(Utils.readFileToString('ressources/texto1.txt')), allowed_chars)
-word_corpus = Corpus.getPalabrasUnigram(Utils.flatListOfStrings(Utils.readFileToString('ressources/texto1.txt')))
+letters_corpus = Corpus.getCaracteresUnigram(Utils.flatListOfStrings(Utils.readFileToString('ressources/default.txt')), allowed_chars)
+word_corpus = Corpus.getPalabrasUnigram(Utils.flatListOfStrings(Utils.readFileToString('ressources/default.txt')))
 
-relation_letters_corpus = Corpus.getCaracteresBigram(Utils.flatListOfStrings(Utils.readFileToString('ressources/texto1.txt')), allowed_chars)
-relation_words_corpus = Corpus.getPalabrasBigram(Utils.flatListOfStrings(Utils.readFileToString('ressources/texto1.txt')))
+relation_letters_corpus = Corpus.getCaracteresBigram(Utils.flatListOfStrings(Utils.readFileToString('ressources/default.txt')), allowed_chars)
+relation_words_corpus = Corpus.getPalabrasBigram(Utils.flatListOfStrings(Utils.readFileToString('ressources/default.txt')))
 
 unigram_letter = Unigram.LettersUnigram(masc, letters_corpus)
 bigram_letter = Bigram.Bigram(masc, relation_letters_corpus, unigram_letter)

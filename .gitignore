@@ -102,3 +102,4 @@ ENV/
 
 #Others
 .idea
+.pkl

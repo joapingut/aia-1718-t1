@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Joaquin, Luis'
 
-import re
+import re, os
 import core.utils as Utils
 
-def getCaracteresUnigram(s, allowed):
-    dict = {}
+def getCaracteresUnigram(s, allowed, corpus={}):
+    dict = corpus
     s = s.lower()
     for x in s:
         if x in dict.keys():
@@ -14,8 +14,8 @@ def getCaracteresUnigram(s, allowed):
             dict[x] = 1
     return dict
 
-def getPalabrasUnigram(s):
-    dict = {}
+def getPalabrasUnigram(s, corpus={}):
+    dict = corpus
     s = s.lower()
     s = re.sub(r'[0-9]+','',s)
     string = re.findall(r'\w+',s)
@@ -26,8 +26,8 @@ def getPalabrasUnigram(s):
             dict[x] = 1
     return dict
 
-def getCaracteresBigram(s, allowed):
-    dict = {}
+def getCaracteresBigram(s, allowed, corpus={}):
+    dict = corpus
     punctmarks = Utils.listOfPuntuationsMarks()
     s = s.lower()
     lastChar = ""
@@ -48,15 +48,9 @@ def getCaracteresBigram(s, allowed):
             lastChar = x
     return dict
 
-def checkNum(s):
-    try:
-        int(s)
-        return True
-    except ValueError:
-        return False
 
-def getPalabrasBigram(s):
-    dict = {}
+def getPalabrasBigram(s, corpus={}):
+    dict = corpus
     punctmarks = Utils.listOfPuntuationsMarks()
     s = s.lower()
     string = re.findall(r"[A-záéíóúñ]+|[1-9]+|[\.)(?¿!¡:;@#,]+", s, re.DOTALL | re.IGNORECASE)
@@ -71,9 +65,24 @@ def getPalabrasBigram(s):
             else:
                 dict[x].update({lastWord:1})
             lastWord = x
-        elif any(o in x for o in punctmarks) or checkNum(x):
+        elif any(o in x for o in punctmarks) or Utils.checkNum(x):
             lastWord = ""
         else:
             dict[x] = {lastWord:1}
             lastWord = x
     return dict
+
+def trainCorpus(name, allowed, corpus):
+    result = corpus
+    for file in os.listdir('../ressources'):
+        if file.startswith('texto'):
+            s = Utils.flatListOfStrings(Utils.readFileToString('../ressources/' + file))
+            if name == 'lettersUnigram':
+                result = getCaracteresUnigram(s, allowed, result)
+            elif name == 'lettersBigram':
+                result = getCaracteresBigram(s, allowed, result)
+            elif name == 'wordsUnigram':
+                result = getPalabrasUnigram(s, result)
+            elif name == 'wordsBigram':
+                result = getPalabrasBigram(s, result)
+    return result

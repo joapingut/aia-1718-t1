@@ -63,4 +63,20 @@ def readFileToString(path):
     return file.readlines()
 
 def listOfPuntuationsMarks():
-    return ["(",")","¡","!","¿","?",":",";","@","#",",","."," ","..."]
+    return ["(",")","¡","!","¿","?",":",";","@","#",",","."," ","...", "_", "-", "[", "]", "\""]
+
+def checkApproximation(original, comparation):
+    longi = len(original)
+    i = 0
+    for index in range(0, longi):
+        if original[index] == comparation[index]:
+            i += 1
+    return str((i/longi) * 100) + " %"
+
+
+def checkNum(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
