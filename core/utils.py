@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
-__author__ = 'Joaquin'
+__author__ = 'Joaquin, Luis'
 
 
-import operator, random
+import operator, random, math
 
+def translatePhrase(masc, phrase):
+    words =phrase.split(' ')
+    translations = []
+    for word in words:
+        translations.append(translateWord(masc, word))
+    return ' '.join(translations)
 
 def translateWord(masc, word):
     result = ''
@@ -17,7 +23,7 @@ def getRandomValue(list):
     max = 0;
     for tup in list:
         max += tup[1]
-    ran = random.randint(1,max)
+    ran = random.randint(0,int(math.floor(max)))
     now = 0
     value = None
     for tup in list:
@@ -42,3 +48,19 @@ def readLettersMasc(path):
             values.append(val.strip())
         masc[key] = values
     return masc
+
+def extractAllowedChars(masc):
+    return flatListOfList(list(masc.values()))
+
+def flatListOfList(things):
+    return [item for sublist in things for item in sublist]
+
+def flatListOfStrings(things):
+    return ''.join(things)
+
+def readFileToString(path):
+    file = open(path, 'r', encoding='utf8')
+    return file.readlines()
+
+def listOfPuntuationsMarks():
+    return ["(",")","¡","!","¿","?",":",";","@","#",",","."," ","..."]

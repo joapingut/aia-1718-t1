@@ -72,7 +72,7 @@ def getPalabrasBigram(s):
     dict = {}
     punctmarks = ["(",")","¡","!","¿","?",":",";","@","#",",","."," ","..."]
     s = s.lower()
-    string = re.findall(r"[A-záéíóú]+|[1-9]+|[\.)(?¿!¡:;@#,]+", s, re.DOTALL | re.IGNORECASE)
+    string = re.findall(r"[A-záéíóúñ]+|[1-9]+|[\.)(?¿!¡:;@#,]+", s, re.DOTALL | re.IGNORECASE)
     lastWord = ""
     for x in string:
         if lastWord == "" and x not in punctmarks:

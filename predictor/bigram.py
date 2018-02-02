@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'Joaquin'
+__author__ = 'Joaquin, Luis'
 
 import operator, random
 import core.utils as Utils
