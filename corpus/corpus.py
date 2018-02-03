@@ -4,6 +4,14 @@ __author__ = 'Joaquin, Luis'
 import re, os
 import core.utils as Utils
 
+'''
+Metodo que recupera del texto s toda la informacion para generar un corpus para el unigram de letras,
+    s: es el texto
+    allowed: es una lista con los caracteres permitidos
+    corpus: diccionario en blanco u otro diccionario que ya posea informacion si se desea agregar otro corpus a la misma
+
+    resultado = {a:2, b:3, c:4, d:5}
+'''
 def getCaracteresUnigram(s, allowed, corpus={}):
     dict = corpus
     s = s.lower()
@@ -14,6 +22,13 @@ def getCaracteresUnigram(s, allowed, corpus={}):
             dict[x] = 1
     return dict
 
+'''
+Metodo que recupera del texto s toda la informacion para generar un corpus para el unigram de palabras,
+    s: es el texto
+    corpus: diccionario en blanco u otro diccionario que ya posea informacion si se desea agregar otro corpus a la misma
+
+    resultado = {aaa:2, bas:3, caca:4, daba:5}
+'''
 def getPalabrasUnigram(s, corpus={}):
     dict = corpus
     s = s.lower()
@@ -26,6 +41,14 @@ def getPalabrasUnigram(s, corpus={}):
             dict[x] = 1
     return dict
 
+'''
+Metodo que recupera del texto s toda la informacion para generar un corpus para el bigram de letras,
+    s: es el texto
+    allowed: es una lista con los caracteres permitidos
+    corpus: diccionario en blanco u otro diccionario que ya posea informacion si se desea agregar otro corpus a la misma
+
+    resultado = {'a':{'p':8, 'c':7}}
+'''
 def getCaracteresBigram(s, allowed, corpus={}):
     dict = corpus
     punctmarks = Utils.listOfPuntuationsMarks()
@@ -48,7 +71,13 @@ def getCaracteresBigram(s, allowed, corpus={}):
             lastChar = x
     return dict
 
+'''
+Metodo que recupera del texto s toda la informacion para generar un corpus para el bigram de palabras,
+    s: es el texto
+    corpus: diccionario en blanco u otro diccionario que ya posea informacion si se desea agregar otro corpus a la misma
 
+    resultado = {'asd':{papa:8, 'caca':7}}
+'''
 def getPalabrasBigram(s, corpus={}):
     dict = corpus
     punctmarks = Utils.listOfPuntuationsMarks()
@@ -72,11 +101,20 @@ def getPalabrasBigram(s, corpus={}):
             lastWord = x
     return dict
 
-def trainCorpus(name, allowed, corpus):
+'''
+Metodo para agregar a un corpus toda la informacion de los textos contenidos en la carpeta ressources que empiecen
+por texto.
+    name: nombre del corpus a entrenar, lettersUnigram, lettersBigram, wordsUnigram, wordsBigram
+    allowed: lista de caractres permitidos, si se ba a entrar un n-gram de palabras se puede ignorar y pasar cualquier valor
+    corpus: el corpus que se quiere entrenar o un diccionario vacio si no hay datos.
+
+resultado: el corpus con la nueva informacion.
+'''
+def trainCorpus(name, allowed, corpus, path='../ressources/'):
     result = corpus
-    for file in os.listdir('../ressources'):
+    for file in os.listdir(path):
         if file.startswith('texto'):
-            s = Utils.flatListOfStrings(Utils.readFileToString('../ressources/' + file))
+            s = Utils.flatListOfStrings(Utils.readFileToString(path + file))
             if name == 'lettersUnigram':
                 result = getCaracteresUnigram(s, allowed, result)
             elif name == 'lettersBigram':

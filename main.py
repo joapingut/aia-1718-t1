@@ -2,25 +2,17 @@
 __author__ = 'Joaquin, Luis'
 
 import core.utils as Utils
-import corpus.corpus as Corpus
-import predictor.unigram as Unigram
-import predictor.bigram as Bigram
+import core.initializer as Init
 
+Init.RESSOURCES_PATH = 'ressources/'
 
-print('Hello, loading predictor')
+Init.initializer(False)
 
-masc = Utils.readLettersMasc('ressources/letters.txt')
-allowed_chars = Utils.extractAllowedChars(masc)
-letters_corpus = Corpus.getCaracteresUnigram(Utils.flatListOfStrings(Utils.readFileToString('ressources/default.txt')), allowed_chars)
-word_corpus = Corpus.getPalabrasUnigram(Utils.flatListOfStrings(Utils.readFileToString('ressources/default.txt')))
-
-relation_letters_corpus = Corpus.getCaracteresBigram(Utils.flatListOfStrings(Utils.readFileToString('ressources/default.txt')), allowed_chars)
-relation_words_corpus = Corpus.getPalabrasBigram(Utils.flatListOfStrings(Utils.readFileToString('ressources/default.txt')))
-
-unigram_letter = Unigram.LettersUnigram(masc, letters_corpus)
-bigram_letter = Bigram.Bigram(masc, relation_letters_corpus, unigram_letter)
-unigram_word = Unigram.WordUnigram(masc, word_corpus, bigram_letter, True)
-bigram_word = Bigram.Bigram(masc, relation_words_corpus, unigram_word)
+masc = Init.masc
+unigram_letter = Init.unigram_letter
+bigram_letter = Init.bigram_letter
+unigram_word = Init.unigram_word
+bigram_word = Init.bigram_word
 
 print('System loaded')
 
