@@ -98,7 +98,8 @@ Metodo para predecir utilizando el unigram de letras.
     accuracy: parametro para indicar si se quiere ver el grado de cercania entre la prediccion y la frase original, solo si la entrada esta en lenguaje natural.
 '''
 def predictLetterUnigram(text, translate=False, random=False, accuracy=False):
-    print('Using Letters unigram')
+    method = "Using Letters unigram"
+    print(method)
     global masc,unigram_letter, bigram_letter, unigram_word, bigram_word
     string = None
     if translate:
@@ -116,7 +117,11 @@ def predictLetterUnigram(text, translate=False, random=False, accuracy=False):
         predicted = ' '.join(result)
     print("Prediction: ", predicted)
     if translate and accuracy:
-        print("Accuracy: ", Utils.checkApproximation(text.lower(), predicted))
+        maccuracy = Utils.checkApproximation(text.lower(), predicted)
+        print("Accuracy: ", accuracy)
+    else:
+        maccuracy = '--%'
+    return "Method: " + method + "\nTranslation: " + string + "\nPrediction: " + predicted + "\nAccuracy: " + maccuracy
 
 '''
 Metodo para predecir utilizando el unigram de palabras.
@@ -126,7 +131,8 @@ Metodo para predecir utilizando el unigram de palabras.
     accuracy: parametro para indicar si se quiere ver el grado de cercania entre la prediccion y la frase original, solo si la entrada esta en lenguaje natural.
 '''
 def predictWordUnigram(text, translate=False, random=False, accuracy=False):
-    print('Using words unigram')
+    method = "Using words unigram"
+    print(method)
     global masc,unigram_letter, bigram_letter, unigram_word, bigram_word
     string = None
     if translate:
@@ -141,7 +147,11 @@ def predictWordUnigram(text, translate=False, random=False, accuracy=False):
         predicted = ' '.join(result)
     print("Prediction: ", predicted)
     if translate and accuracy:
-        print("Accuracy: ", Utils.checkApproximation(text.lower(), predicted))
+        maccuracy = Utils.checkApproximation(text.lower(), predicted)
+        print("Accuracy: ", accuracy)
+    else:
+        maccuracy = '--%'
+    return "Method: " + method + "\nTranslation: " + string + "\nPrediction: " + predicted + "\nAccuracy: " + maccuracy
 
 '''
 Metodo para predecir utilizando el bigram de letras.
@@ -151,7 +161,8 @@ Metodo para predecir utilizando el bigram de letras.
     accuracy: parametro para indicar si se quiere ver el grado de cercania entre la prediccion y la frase original, solo si la entrada esta en lenguaje natural.
 '''
 def predictLetterBigram(text, translate=False, random=False, accuracy=False):
-    print('Using Letters bigram')
+    method = "Using Letters bigram"
+    print(method)
     global masc,unigram_letter, bigram_letter, unigram_word, bigram_word
     string = None
     if translate:
@@ -171,7 +182,11 @@ def predictLetterBigram(text, translate=False, random=False, accuracy=False):
     predicted = ' '.join(result)
     print("Prediction: ", predicted)
     if translate and accuracy:
-        print("Accuracy: ", Utils.checkApproximation(text.lower(), predicted))
+        maccuracy = Utils.checkApproximation(text.lower(), predicted)
+        print("Accuracy: ", accuracy)
+    else:
+        maccuracy = '--%'
+    return "Method: " + method + "\nTranslation: " + string + "\nPrediction: " + predicted + "\nAccuracy: " + maccuracy
 
 
 '''
@@ -182,7 +197,8 @@ Metodo para predecir utilizando el bigram de palabras.
     accuracy: parametro para indicar si se quiere ver el grado de cercania entre la prediccion y la frase original, solo si la entrada esta en lenguaje natural.
 '''
 def predictWordBigram(text, translate=False, random=False, accuracy=False):
-    print('Using words bigram')
+    method = "Using words bigram"
+    print(method)
     global masc,unigram_letter, bigram_letter, unigram_word, bigram_word
     string = None
     if translate:
@@ -199,7 +215,11 @@ def predictWordBigram(text, translate=False, random=False, accuracy=False):
     predicted = ' '.join(result)
     print("Prediction: ", predicted)
     if translate and accuracy:
-        print("Accuracy: ", Utils.checkApproximation(text.lower(), predicted))
+        maccuracy = Utils.checkApproximation(text.lower(), predicted)
+        print("Accuracy: ", accuracy)
+    else:
+        maccuracy = '--%'
+    return "Method: " + method + "\nTranslation: " + string + "\nPrediction: " + predicted + "\nAccuracy: " + maccuracy
 
 '''
 Ejemplos de uso
